@@ -1,0 +1,9 @@
+{
+	"name": "covid-reporting-udemy-kh-adf",
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "94464b0e-dc14-4c03-a94e-c8f9647e8231",
+		"tenantId": "e36ee38f-91b8-4dca-9b13-caa5360c9714"
+	}
+}
