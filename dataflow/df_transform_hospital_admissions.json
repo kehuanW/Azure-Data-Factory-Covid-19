@@ -48,6 +48,9 @@
 				},
 				{
 					"name": "JoinWithDate"
+				},
+				{
+					"name": "PivotWeekly"
 				}
 			],
 			"scriptLines": [
@@ -56,7 +59,7 @@
 				"          indicator as string,",
 				"          date as string,",
 				"          year_week as string,",
-				"          value as string,",
+				"          value as integer,",
 				"          source as string,",
 				"          url as string",
 				"     ),",
@@ -128,7 +131,17 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> JoinWithDate"
+				"     broadcast: 'auto')~> JoinWithDate",
+				"JoinWithDate pivot(groupBy(country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          population,",
+				"          reported_year_week,",
+				"          source),",
+				"     pivotBy(indicator, ['Weekly new hospital admission per 100k', 'Weekly new ICU admission per 100k']),",
+				"     count = sum(value),",
+				"     columnNaming: '$N-$V',",
+				"     lateral: true) ~> PivotWeekly"
 			]
 		}
 	}
