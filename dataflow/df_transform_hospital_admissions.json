@@ -39,9 +39,6 @@
 				},
 				{
 					"name": "SplitDailyFromWeekly"
-				},
-				{
-					"name": "derived"
 				}
 			],
 			"scriptLines": [
@@ -113,8 +110,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectReqdFields2",
 				"SelectReqdFields2 split(indicator == 'Weekly new hospital admissions per 100k' || indicator == 'Weekly new ICU admission per 100k',",
-				"     disjoint: false) ~> SplitDailyFromWeekly@(Weekly, Daily)",
-				"DimDataSource derive(ecde_year_week = year) ~> derived"
+				"     disjoint: false) ~> SplitDailyFromWeekly@(Weekly, Daily)"
 			]
 		}
 	}
