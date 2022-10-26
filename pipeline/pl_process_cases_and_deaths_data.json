@@ -27,6 +27,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Process"
+		},
 		"annotations": [],
 		"lastPublishTime": "2022-10-23T13:25:22Z"
 	},
