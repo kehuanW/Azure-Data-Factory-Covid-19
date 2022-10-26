@@ -1407,13 +1407,15 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "df_transform_cases_deaths",
+								"referenceName": "df_transform_hospital_admissions",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"CasesAndDeathsSource": {},
-									"CountryLookup": {},
-									"CaseAndDeathSink": {}
+									"HospitalAdmissionSource": {},
+									"CountrySource": {},
+									"DimDataSource": {},
+									"WeeklySink": {},
+									"DailySink": {}
 								}
 							},
 							"staging": {},
@@ -1432,7 +1434,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/df_transform_cases_deaths')]"
+				"[concat(variables('factoryId'), '/dataflows/df_transform_hospital_admissions')]"
 			]
 		}
 	]
