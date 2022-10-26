@@ -39,6 +39,9 @@
 				},
 				{
 					"name": "SplitDailyFromWeekly"
+				},
+				{
+					"name": "DeriveECDCYearWeek"
 				}
 			],
 			"scriptLines": [
@@ -64,7 +67,21 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> CountrySource",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          date_key as date,",
+				"          date as date,",
+				"          year as string,",
+				"          month as short,",
+				"          day as short,",
+				"          day_name as string,",
+				"          day_of_year as short,",
+				"          week_of_month as short,",
+				"          week_of_year as string,",
+				"          month_name as string,",
+				"          year_month as integer,",
+				"          year_week as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> DimDataSource",
 				"HospitalAdmissionSource select(mapColumn(",
@@ -96,7 +113,8 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectReqdFields2",
 				"SelectReqdFields2 split(indicator == 'Weekly new hospital admissions per 100k' || indicator == 'Weekly new ICU admission per 100k',",
-				"     disjoint: false) ~> SplitDailyFromWeekly@(Weekly, Daily)"
+				"     disjoint: false) ~> SplitDailyFromWeekly@(Weekly, Daily)",
+				"DimDataSource derive(ecdc_year_week = year+'-W'+lpad(week_of_year, 2, '0')) ~> DeriveECDCYearWeek"
 			]
 		}
 	}
